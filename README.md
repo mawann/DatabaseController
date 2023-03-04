@@ -9,6 +9,7 @@ Then this class might be for you.
 
 Sample usage:
 
+```
 Class FooController extends DatabaseController {
 
   public function foo() {
@@ -21,3 +22,4 @@ Class FooController extends DatabaseController {
   };
 
 }
+```
