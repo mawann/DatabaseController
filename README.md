@@ -40,6 +40,7 @@ class FooController extends Controller {
       $result = DB::table('customer')->get();
     }
   }
+  
 }
 ```
 
