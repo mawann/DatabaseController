@@ -9,18 +9,34 @@ Class DatabaseController extends Controller {
 
   public function __construct() {
     $dbhost = env('DB_HOST');
+		$dbport = env('DB_PORT');
+		$dbsock = env('DB_SOCKET');
     $dbname = env('DB_DATABASE');
     $dbuser = env('DB_USERNAME');
     $dbpass = env('DB_PASSWORD');
-    $chrset = env('DB_CHARSET');
+		$chrset = env('DB_CHARSET');
 
     if (strtolower(env('DB_CONNECTION')) == 'mysql') {
-      if (empty($chrset)) $chrset = 'utf8mb4';
-      $dsn = "mysql:host=$dbhost;dbname=$dbname;charset=$chrset";
+			if (!empty($dbsock)) {
+				$dbconn = "unix_socket=$dbsock";
+			}
+			else {
+				if (empty($dbport)) $dbport = 3306;
+				$dbconn = "host=$dbhost;port=$dbport";
+			};
+			if (empty($chrset)) $chrset = 'utf8mb4';
+      $dsn = "mysql:$dbconn;dbname=$dbname;charset=$chrset";
     }
     elseif (strtolower(env('DB_CONNECTION')) == 'pgsql') {
-      if (empty($chrset)) $chrset = 'utf8';
-      $dsn = "pgsql:host=$dbhost;dbname=$dbname;options='--client_encoding=$chrset'";
+			if (!empty($dbsock)) {
+				$dbconn = "unix_socket=$dbsock";
+			}
+			else {
+				if (empty($dbport)) $dbport = 5432;
+				$dbconn = "host=$dbhost;port=$dbport";
+			};
+			if (empty($chrset)) $chrset = 'utf8';
+      $dsn = "pgsql:$dbconn;dbname=$dbname;options='--client_encoding=$chrset'";
     }
     else {
       echo 'Sorry, this class supports only MySQL/MariaDB and PostgreSQL.';
