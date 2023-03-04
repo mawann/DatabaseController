@@ -1,5 +1,9 @@
 <?php
 
+// DatabaseController
+// Programmed by Mawan Agus Nugroho, 2023.
+// All rights reserved.
+
 namespace App\Http\Controllers;
 
 Class DatabaseController extends Controller {
@@ -9,33 +13,33 @@ Class DatabaseController extends Controller {
 
   public function __construct() {
     $dbhost = env('DB_HOST');
-		$dbport = env('DB_PORT');
-		$dbsock = env('DB_SOCKET');
+    $dbport = env('DB_PORT');
+    $dbsock = env('DB_SOCKET');
     $dbname = env('DB_DATABASE');
     $dbuser = env('DB_USERNAME');
     $dbpass = env('DB_PASSWORD');
-		$chrset = env('DB_CHARSET');
+    $chrset = env('DB_CHARSET');
 
     if (strtolower(env('DB_CONNECTION')) == 'mysql') {
-			if (!empty($dbsock)) {
-				$dbconn = "unix_socket=$dbsock";
-			}
-			else {
-				if (empty($dbport)) $dbport = 3306;
-				$dbconn = "host=$dbhost;port=$dbport";
-			};
-			if (empty($chrset)) $chrset = 'utf8mb4';
+      if (!empty($dbsock)) {
+        $dbconn = "unix_socket=$dbsock";
+      }
+      else {
+        if (empty($dbport)) $dbport = 3306;
+        $dbconn = "host=$dbhost;port=$dbport";
+      };
+      if (empty($chrset)) $chrset = 'utf8mb4';
       $dsn = "mysql:$dbconn;dbname=$dbname;charset=$chrset";
     }
     elseif (strtolower(env('DB_CONNECTION')) == 'pgsql') {
-			if (!empty($dbsock)) {
-				$dbconn = "unix_socket=$dbsock";
-			}
-			else {
-				if (empty($dbport)) $dbport = 5432;
-				$dbconn = "host=$dbhost;port=$dbport";
-			};
-			if (empty($chrset)) $chrset = 'utf8';
+      if (!empty($dbsock)) {
+        $dbconn = "unix_socket=$dbsock";
+      }
+      else {
+        if (empty($dbport)) $dbport = 5432;
+        $dbconn = "host=$dbhost;port=$dbport";
+      };
+      if (empty($chrset)) $chrset = 'utf8';
       $dsn = "pgsql:$dbconn;dbname=$dbname;options='--client_encoding=$chrset'";
     }
     else {
