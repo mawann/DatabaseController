@@ -33,12 +33,12 @@ use Illuminate\Support\Facades\DB;
 
 class FooController extends Controller {
 
-	function foo() {
-		if (DB::table('customer')->where('id', 1)->exists()) {
-			$result = DB::table('customer')->select('salary')->where('id', 1)->first();
-			DB::table('customer')->update(['salary' => $result->salary + 100])->where('id', 1);
-			$result = DB::table('customer')->get();
-		}
-	}
+  function foo() {
+    if (DB::table('customer')->where('id', 1)->exists()) {
+      $result = DB::table('customer')->select('salary')->where('id', 1)->first();
+      DB::table('customer')->update(['salary' => $result->salary + 100])->where('id', 1);
+      $result = DB::table('customer')->get();
+    }
+  }
 }
 ```
