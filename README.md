@@ -42,3 +42,7 @@ class FooController extends Controller {
   }
 }
 ```
+
+*Why did I create this class?*  
+I once created a Laravel-based application that accessed MariaDB. When the database was changed to PostgreSQL, the application ran normally but all "first" or "get" commands returned empty strings.
+Until now I don't know the cause of this problem.
