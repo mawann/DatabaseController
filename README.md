@@ -12,7 +12,7 @@ Sample usage:
 ```
 Class FooController extends DatabaseController {
 
-  public function foo() {
+  function foo() {
     if $this->exists('select * from customer where id = :id', [':id' => 1]') {
       // Or using place holder style like these...
       $result = $this->fetch('select salary from customer where id = ?', 1);
