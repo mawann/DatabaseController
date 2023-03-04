@@ -33,8 +33,7 @@ Class DatabaseController extends Controller {
     }
     elseif (strtolower(env('DB_CONNECTION')) == 'pgsql') {
       if (!empty($dbsock)) {
-        $dbconn = "unix_socket=$dbsock";
-      }
+        $dbconn = "host=$dbsock";
       else {
         if (empty($dbport)) $dbport = 5432;
         $dbconn = "host=$dbhost;port=$dbport";
